@@ -2,7 +2,7 @@
 # Hero widget.
 widget = "hero"  # See https://sourcethemes.com/academic/docs/page-builder/
 headless = true  # This file represents a page section.
-active = true  # Activate this widget? true/false
+active = false  # Activate this widget? true/false
 weight = 10  # Order that this section will appear.
 
 title = "Welcome!"
@@ -48,6 +48,6 @@ hero_media = "horst/bakers_3.png"
   label = 'All [art](https://github.com/hadley/joy-of-fp) by [@allisonhorst](https://github.com/allisonhorst/stats-illustrations) [(CC-BY-SA)](https://creativecommons.org/licenses/by-sa/4.0/)'
 +++
 
-This is my knowledge repository for the YSC 2019 R Markdown workshop.
+This is my personal website, where I post random bits and bobs.
 
 
