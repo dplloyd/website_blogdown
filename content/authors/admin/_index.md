@@ -8,7 +8,7 @@ education:
     institution: The University of Edinburgh
     year: 2015
   - course: MPhys in Physics
-    institution: Massachusetts Institute of Technology
+    institution: The University of Edinburgh
     year: 2010
 email: "diarmuid.lloyd@gmail.com"
 interests:
