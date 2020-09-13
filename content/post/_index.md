@@ -2,6 +2,6 @@
 header:
   caption: ""
   image: ""
-title: Head nonsense
+title: Blog posts
 view: 2
 ---
