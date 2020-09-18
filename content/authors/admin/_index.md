@@ -39,4 +39,4 @@ user_groups:
 - Visitors
 ---
 
-Hello! 
+Hello! I'm a rehabilitated physicist working as a government analyst. This website is a means of sharing some of my hobby coding projects, or inane ramblings.  
