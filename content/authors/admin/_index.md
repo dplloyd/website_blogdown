@@ -20,9 +20,9 @@ interests:
 - Combinations of all the above
 name: Diarmuid Lloyd
 organizations:
-- name: Scottish Government
+- name: 
   url: ""
-role: Senior Assistant Statistician
+role: analyst
 social:
 - icon: envelope
   icon_pack: fas
@@ -39,4 +39,4 @@ user_groups:
 - Visitors
 ---
 
-Hello! I'm a rehabilitated physicist working as a government analyst. This website is a means of sharing some of my hobby coding projects, or inane ramblings.  
+
