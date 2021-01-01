@@ -8,4 +8,7 @@ categories:
 tags: []
 ---
 
+Despite have a relatively technical background, I generally only did as much programming as was necessary
+
+
 ![](https://imgs.xkcd.com/comics/git.png)

@@ -3,8 +3,10 @@ title = "Home"
 
 +++
 
-[<img src="https://simpleicons.org/icons/github.svg" style="max-width:15%;min-width:40px;float:right;" alt="Github repo" />](https://github.com/yihui/hugo-ivy)
+![](/img/about-me-waffle-chart.png)
 
-This Hugo theme was ported from [Ivy](https://github.com/dmulholland/ivy), a minimalist website generator built in Python. I don't have time to document it. You have to read the source code to understand what it can do. Like Ivy, this theme is also released under [the Unlicense](https://en.wikipedia.org/wiki/Unlicense), which basically means you just do whatever you want.
+Welcome to my website, where I attempt to document little bits of R-related learning, data visualisation and perhaps some blogging. While I have a relatively technical background, the extent of my programming didn't extend much beyond what was required for the task at hand. Recently, I started using R more often in my day job, and somewhat to my surprise, discovered I enjoyed it very much. So, I am essentially using this website as motivation to continuing to learn R and document any hobby analyses or interesting features I stumble across the Internet. 
 
-All pages not under the root directory of the website are listed below. You can also visit the list page of a single section, e.g., [posts](/post/), or [notes](/note/).
+If you're interested, the code for generating the figure above is [here](/note/2021/01/01/waffle-life/).
+
+All pages are listed below. However, you can also visit the list page of a single section, e.g., [posts](/post/), or [notes](/note/).

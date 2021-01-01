@@ -1,12 +1,13 @@
 baseurl = "/"
 languageCode = "en-us"
-title = "Diarmuid Lloyd"
+title = "dplloyd"
 theme = "hugo-ivy"
 googleAnalytics = ""
 disqusShortname = ""
 preserveTaxonomyNames = true
 footnotereturnlinkcontents = "↩"
 uglyURLs = false
+enableEmoji = true
 
 [permalinks]
     post = "/:slug/"
@@ -24,6 +25,10 @@ uglyURLs = false
     name = "Posts"
     url = "/post"
     weight = 3
+    [[menu.main]]
+    name = "Quick notes"
+    url = "/note"
+    weight = 4
 [[menu.main]]
     name = "Tags"
     url = "/tags"
@@ -38,9 +43,9 @@ uglyURLs = false
     weight = 7
     
 [params]
-    description = "witterings • R • data visualisation • everything else"
+    description = "Diarmuid Lloyd's personal website"
     footer = "Powered by [Hugo](https://gohugo.io/), [blogdown](https://github.com/rstudio/blogdown) and [the Ivy theme](https://github.com/yihui/hugo-ivy)"
-    twitterImage = "/assets/summer-card.png"
+    twitterImage = "/img/logo.png"
     logo = "https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/blogdown.png"
     
   highlightjsVersion = "9.12.0"
@@ -51,3 +56,4 @@ uglyURLs = false
 
 [blackfriday]
   hrefTargetBlank = true
+  

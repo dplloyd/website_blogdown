@@ -1,0 +1,73 @@
+---
+title: Waffle Life
+author: Diarmuid Lloyd
+date: '2021-01-01'
+slug: waffle-life
+categories: []
+tags: []
+---
+
+<link href="index_files/panelset/panelset.css" rel="stylesheet" />
+<script src="index_files/panelset/panelset.js"></script>
+
+
+<p>For no particular reason, I felt like a banner on the landing page was needed. The code to produce it can be read below. It’s based on Isabella Benabaye’s elegant representation of her life in months using a waffle chart, and reminds me of a <a href="https://waitbutwhy.com/2014/05/life-weeks.html">Wait But Why</a> post. I’ve used her <a href="https://github.com/isabellabenabaye/life-chart">code</a> as a starting point to produce my own version, with some added fuzziness to mask my exact age (out of an abundance of internet caution, rather than vanity! Otherwise you’d be asking for the name of my first childhood pet next).</p>
+<p>I’ve a added a <a href="https://github.com/dplloyd/diarmuid/blob/main/R/waffle_time.R">tweaked version as a function to my GitHub</a>, which generates the plot from a date vector.</p>
+<div id="code" class="section level2 panelset">
+<h2>Code</h2>
+<div id="section" class="section level3">
+<h3></h3>
+<div class="panelset">
+<div class="panel">
+<div class="panel-name">
+Code
+</div>
+<pre class="r"><code>#This code was first copied from 
+#https://github.com/isabellabenabaye/life-chart, 
+#and then adjusted for my own needs. 
+
+library(tidyverse)
+library(lubridate)
+library(waffle)
+
+#xaringanExtra::style_panelset_tabs(foreground = &quot;honeydew&quot;)
+
+# Create the data-----
+life_data &lt;-
+  tibble(months = factor(rep(month.abb[1:12], 101), levels=month.abb[1:12])) %&gt;%   ## make months
+  tibble(age = rep(0:100, each = 12) ) %&gt;%
+  rowid_to_column(&quot;row_name&quot;)  ## add column for row number
+
+# add the &quot;eras&quot; to be colored in the waffle chart
+life_data &lt;- life_data %&gt;%
+  mutate(era = fct_inorder(case_when(row_name &lt; 225 ~ &quot;a&quot;,
+                                     row_name &lt; 285 ~ &quot;b&quot;,
+                                     row_name &lt; 333 ~ &quot;c&quot;,
+                                     row_name &lt; 369 ~ &quot;d&quot;,
+                                     row_name &lt; 387 ~ &quot;e&quot;,
+                                     row_name &lt; 400 ~ &quot;f&quot;
+                                    )))
+
+# # Waffle chart-----
+life_in_months &lt;- life_data %&gt;%
+  count(era) %&gt;% ## the count of each era is the number of months in that era
+  ggplot(aes(fill = era, values = n)) +
+  geom_waffle(color = &quot;#F7F7F7&quot;, n_rows = 12, size = 1, flip = FALSE) + ## make each row a year/12 months
+  scale_fill_manual(name = &quot;&quot;,
+  values = c(&quot;#EF476F&quot;,&quot;#FCA311&quot;,&quot;#FFD166&quot;,&quot;#0EAD69&quot;,&quot;#4ECDC4&quot;,&quot;#118AB2&quot;)) +  ## assign colors to the eras
+  coord_equal() +
+  labs (NULL) +
+  theme(legend.position =  &quot;none&quot;, rect = element_blank(), axis.ticks = element_blank(),plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), &quot;cm&quot;) ) +
+  theme_enhance_waffle()
+# 
+ life_in_months</code></pre>
+</div>
+<div class="panel">
+<div class="panel-name">
+Output
+</div>
+<p><img src="index_files/figure-html/waffle-chart-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+</div>
