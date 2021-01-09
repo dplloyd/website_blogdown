@@ -1,6 +1,6 @@
 baseurl = "/"
 languageCode = "en-us"
-title = "dplloyd"
+title = "diarmuid.lloyd"
 theme = "hugo-ivy"
 googleAnalytics = ""
 disqusShortname = ""
@@ -43,7 +43,7 @@ enableEmoji = true
     weight = 7
     
 [params]
-    description = "Diarmuid Lloyd's personal website"
+    description = "bit and bobs"
     footer = "Powered by [Hugo](https://gohugo.io/), [blogdown](https://github.com/rstudio/blogdown) and [the Ivy theme](https://github.com/yihui/hugo-ivy)"
     twitterImage = "/img/logo.png"
     logo = "https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/blogdown.png"
