@@ -1,6 +1,7 @@
 ---
 title: Building this website
 author: Diarmuid Lloyd
+draft: true
 date: '2020-12-30'
 slug: building-this-website
 categories:
@@ -8,7 +9,6 @@ categories:
 tags: []
 ---
 
-Despite have a relatively technical background, I generally only did as much programming as was necessary
 
 
 ![](https://imgs.xkcd.com/comics/git.png)
