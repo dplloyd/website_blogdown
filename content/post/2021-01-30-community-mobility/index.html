@@ -1,0 +1,154 @@
+---
+title: Comparing community mobility after lockdown
+author: Diarmuid Lloyd
+date: '2021-01-30'
+slug: community-mobility-lockdown
+categories: 
+  - miscellaneous
+tags:
+  -covid-19 
+  -geom_smooth
+  -ggplot2 ]
+---
+
+
+
+<p>When the first UK national “stay at home” announcement was made (typically referred to as “lockdown”), it was startling how quiet the streets became overnight as the public drastically curtailed their mobility. With fewer cars, the air felt cleaner,and I realised how carefully I previously managed my breathing when walking along urban roads, typically taking shallow breaths, or holding it entirely while HGVs and 4x4s roared by. I could now make a phone call while going for a stroll, and not have the volume set to ear drum splitting levels to make out what the person at the other end of the line was saying. Heck, it was nice to be able to walk in the road, rather than cling to the edges!</p>
+<p>Of course, as restrictions were eased, and people partly returned to familiar routines, the roads (and pavements) gradually got busier. Around the new year, a second national lockdown was announced however, and I reasonably (or naively) expected a similar step change in how congested the roads felt. However, it didn’t ‘feel’ as quiet - both in relative, and absolute terms. But how accurate was this feeling?</p>
+<div class="figure">
+<img src="/img/Edinburgh-mobility.png" alt="" />
+<p class="caption">Edinburgh community mobility trends.</p>
+</div>
+<p>Google have regularly updated their <a href="https://www.google.com/covid19/mobility/">Community Mobility Reports</a>, which captures anonymised sets of data from users who have turned on their Location History setting on their Android devices, and compares the mobility to a median baseline from early 2020. So, we’re looking at a particular sample of the population, relative to a fixed point in time. I’ve re-scaled these data to “days since lockdown” to compare how this sample of the population have changed their behaviour leading up to, and after the loackdown annoucements. A caveat is this has been a very light touch analysis, and I have used the data pretty much as published - I haven’t tried to control for public holidays, for example.</p>
+<p>Nevertheless, the trends as presented suggest that in Edinburgh, the public are generally more mobile compared to the first lockdown. However, relative to the 2020 baseline, mobility is still much lower than ‘normal’. Assuming the Edinburgh average is representative of my particular part of the city, I think my perceptions have some basis.</p>
+<p>I don’t have time to compare Edinburgh to Scotland as a whole, but it was quick to compare to the UK, which suggests a similar pattern:</p>
+<div class="figure">
+<img src="/img/UK-mobility.png" alt="" />
+<p class="caption">UK community mobility trends.</p>
+</div>
+<div id="code" class="section level1">
+<h1>Code</h1>
+<p>The code for each of these plots is shown below. The aggregate csv file can be downloaded from Google <a href="https://www.gstatic.com/covid19/mobility/Region_Mobility_Report_CSVs.zip">here</a>.</p>
+<pre class="r"><code>
+## Packages
+library(tidyverse)
+
+data &lt;-
+  readr::read_csv(&quot;data/Region_Mobility_Report_CSVs/2020_GB_Region_Mobility_Report.csv&quot;)
+
+# I want to know what the change in mobility has been after the first and second major lockdowns in Scotland
+lockdown1 &lt;- as.Date(&quot;2020-03-23&quot;)
+lockdown2 &lt;- as.Date(&quot;2021-01-05&quot;)
+
+# Number of days since second lockdown
+days_since_lockdown &lt;- Sys.Date() - lockdown2
+
+lockdown1_dates &lt;-
+  seq.Date(lockdown1, length.out = days_since_lockdown , by = &quot;days&quot;)
+lockdown2_dates &lt;-
+  seq.Date(lockdown2, length.out = days_since_lockdown , by = &quot;days&quot;)
+
+# Add days since each lockdown
+data &lt;- data %&gt;%
+  select(country_region:sub_region_1,
+         date:residential_percent_change_from_baseline) %&gt;%
+  mutate(sub_region = if_else(is.na(sub_region_1), &quot;UK&quot;, sub_region_1)) %&gt;%
+  group_by(sub_region) %&gt;%
+  mutate(
+    days_since_lockdown1 = date - lockdown1,
+    days_since_lockdown2 = date - lockdown2
+  ) %&gt;%
+  select(sub_region,
+         date,
+         days_since_lockdown1,
+         days_since_lockdown2,
+         everything())
+
+
+# Create a long version of the data
+data_long &lt;- data %&gt;%
+  pivot_longer(
+    cols = c(days_since_lockdown1, days_since_lockdown2),
+    names_to = &quot;lockdown_number&quot;,
+    values_to = &quot;days_since_lockdown&quot;
+  ) %&gt;%
+  pivot_longer(
+    retail_and_recreation_percent_change_from_baseline:residential_percent_change_from_baseline,
+    names_to = &quot;measure&quot;,
+    values_to = &quot;pc_change&quot;
+  ) %&gt;%  select(-sub_region_1) %&gt;%
+  mutate(measure = as.factor(measure), lockdown_number = as.factor(lockdown_number))
+
+# Give the different location levels more human readable names
+data_long &lt;-
+  data_long %&gt;%
+  mutate(
+    measure =  forcats::fct_recode(
+      measure,
+      &quot;Grocery and pharmacy&quot; = &quot;grocery_and_pharmacy_percent_change_from_baseline&quot;,
+      &quot;Parks&quot; = &quot;parks_percent_change_from_baseline&quot;,
+      &quot;Transit stations&quot; = &quot;transit_stations_percent_change_from_baseline&quot;,
+      &quot;Residential&quot; = &quot;residential_percent_change_from_baseline&quot;,
+      &quot;Workplaces&quot; = &quot;workplaces_percent_change_from_baseline&quot;,
+      &quot;Retail and recreation&quot; = &quot;retail_and_recreation_percent_change_from_baseline&quot;
+    )
+  ) 
+
+# Edinburgh data ----
+edidata &lt;- data_long %&gt;% filter(sub_region == &quot;Edinburgh&quot;) 
+
+levels(edidata$lockdown_number) &lt;-  c(&quot;23 Mar 2020&quot;,&quot;05 Jan 2021&quot;)
+
+smooth_plot_edi &lt;- edidata %&gt;% filter(days_since_lockdown &gt;= -14 &amp; days_since_lockdown &lt; 30 ) %&gt;% 
+  ggplot( aes(x = days_since_lockdown, y = pc_change, colour = lockdown_number) ) +
+  geom_smooth() +
+  geom_point(size = .1) +
+  facet_wrap(~measure, scales = &quot;free_y&quot;) 
+
+smooth_plot_edi &lt;- smooth_plot_edi + 
+  labs(colour = &quot;Stay at home date&quot;,title =  &quot;Edinburgh movement trends over time by place category&quot;,
+       caption = &quot;data: Google Community Mobilty Reports&quot;) +
+    scale_y_continuous(name = &quot;Percent change from baseline&quot;) +
+  scale_x_continuous(name = &quot;Days since lockdown&quot;)  +
+  geom_vline(xintercept = 0, alpha = 0.6) +
+  theme_minimal()+
+  theme( legend.position = &quot;bottom&quot;) 
+
+smooth_plot_edi
+
+png(&quot;output/Edinburgh-mobility.png&quot;)
+smooth_plot_edi
+dev.off()
+
+
+
+# UK data ---
+ukdata &lt;- data_long %&gt;% filter(sub_region == &quot;UK&quot;) 
+
+
+levels(ukdata$lockdown_number) &lt;-  c(&quot;23 Mar 2020&quot;,&quot;05 Jan 2021&quot;)
+
+
+smooth_plot_uk &lt;- ukdata %&gt;% filter(days_since_lockdown &gt;= -14 &amp; days_since_lockdown &lt; 30 ) %&gt;% 
+  ggplot( aes(x = days_since_lockdown, y = pc_change, colour = lockdown_number) ) +
+  geom_smooth() +
+  geom_point(size = .1) +
+  facet_wrap(~measure, scales = &quot;free_y&quot;) 
+
+smooth_plot_uk &lt;- smooth_plot_uk + 
+  labs(colour = &quot;Stay at home date&quot;,title =  &quot;UK movement trends over time by place category&quot;,
+       caption = &quot;data: Google Community Mobilty Reports&quot;) +
+  scale_y_continuous(name = &quot;Percent change from baseline&quot;) +
+  scale_x_continuous(name = &quot;Days since lockdown&quot;)  +
+  geom_vline(xintercept = 0, alpha = 0.6) +
+  theme_minimal() +
+  theme( legend.position = &quot;bottom&quot;)
+
+smooth_plot_uk
+
+png(&quot;output/UK-mobility.png&quot;)
+smooth_plot_uk
+dev.off()
+ 
+</code></pre>
+</div>
