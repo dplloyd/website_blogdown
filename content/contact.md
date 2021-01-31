@@ -2,6 +2,6 @@
 title = "Contact"
 +++
 
-You can email me at <first name>.<last name> at gmail.com. Or find me on Twitter (@diarmuidlloyd).
+My gmail alias is diarmuid.lloyd. Or find me on Twitter (@diarmuidlloyd).
 
 
