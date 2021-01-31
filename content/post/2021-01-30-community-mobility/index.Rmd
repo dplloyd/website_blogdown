@@ -6,9 +6,9 @@ slug: community-mobility-lockdown
 categories: 
   - miscellaneous
 tags:
-  -covid-19 
-  -geom_smooth
-  -ggplot2 ]
+  - covid-19 
+  - geom_smooth
+  - ggplot2
 ---
 
 When the first UK national "stay at home" announcement was made (typically referred to as "lockdown"), it was startling how quiet the streets became overnight as the public drastically curtailed their mobility. With fewer cars, the air felt cleaner, and I realised how carefully I previously managed my breathing when walking along urban roads, typically taking shallow breaths, or holding it entirely while HGVs and 4x4s roared by. I could now make a phone call while going for a stroll, and not have the volume set to ear drum splitting levels to make out what the person at the other end of the line was saying. Heck, it was nice to be able to walk in the road, rather than cling to the edges!
