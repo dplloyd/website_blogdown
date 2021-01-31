@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://diarmuid.netlify.app/"
 languageCode = "en-us"
 title = "diarmuid lloyd"
 theme = "hugo-ivy"
