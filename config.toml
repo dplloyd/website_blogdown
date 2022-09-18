@@ -44,7 +44,7 @@ enableEmoji = true
     
 [params]
     description = "bit and bobs"
-    footer = "&copy; Diarmuid Lloyd 2021 | Powered by [Hugo](https://gohugo.io/), [blogdown](https://github.com/rstudio/blogdown) and [the Ivy theme](https://github.com/yihui/hugo-ivy)"
+    footer = "&copy; Diarmuid Lloyd 2022 | Powered by [Hugo](https://gohugo.io/), [blogdown](https://github.com/rstudio/blogdown) and [the Ivy theme](https://github.com/yihui/hugo-ivy)"
     twitterImage = "/img/logo.png"
     logo = "https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/blogdown.png"
     
