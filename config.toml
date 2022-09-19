@@ -57,3 +57,8 @@ enableEmoji = true
 [blackfriday]
   hrefTargetBlank = true
   
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
