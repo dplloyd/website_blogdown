@@ -1,0 +1,28 @@
+---
+title: This is a Test Post
+author: Diarmuid Lloyd
+date: '2024-03-23'
+slug: []
+categories: []
+tags: []
+_build:
+  render: never
+  list: never
+  publishResources: no
+---
+
+Returning to this dusty old website to see if I can remember how to publish posts...
+
+Here's an R chunk:
+
+
+```{r}
+library(tidyverse)
+
+mtcars |> 
+ggplot() +
+  geom_point(aes(mpg, hp, size = wt), alpha = 0.5) +
+  theme_minimal()
+
+```
+
