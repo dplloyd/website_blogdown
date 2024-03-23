@@ -1,0 +1,36 @@
+---
+title: This is a Test Post
+author: Diarmuid Lloyd
+date: '2024-03-23'
+slug: []
+categories: []
+tags: []
+_build:
+  render: never
+  list: never
+  publishResources: no
+---
+
+
+
+<p>Returning to this dusty old website to see if I can remember how to publish posts…</p>
+<p>Here’s an R chunk:</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.3.1</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.3.1</code></pre>
+<pre><code>## Warning: package &#39;stringr&#39; was built under R version 4.3.1</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.2     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>mtcars |&gt; 
+ggplot() +
+  geom_point(aes(mpg, hp, size = wt), alpha = 0.5) +
+  theme_minimal()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
